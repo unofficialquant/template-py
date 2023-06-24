@@ -38,7 +38,7 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.29.0
+    rev: v1.32.0
     hooks:
       - id: yamllint
         args:
@@ -100,3 +100,10 @@ repos:
         types: [python]
         args:
           - --config-file=.mypy.ini
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        types: [python]
