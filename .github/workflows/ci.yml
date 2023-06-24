@@ -37,7 +37,8 @@ jobs:
           key: >
             ${{ runner.os }}
             -${{ matrix.python-version }}
-            -${{ hashFiles('pyproject.toml') }}
+            -${{ hashFiles('requirements.txt') }}
+            -${{ hashFiles('requirements-dev.txt') }}
       - name: Installing dependencies
         run: |
           pip install --upgrade-strategy eager -r requirements.txt
