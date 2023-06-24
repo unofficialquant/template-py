@@ -1,0 +1,3 @@
+[pydocstyle]
+add-ignore=D104
+match="(__init__).py"

@@ -1,0 +1,6 @@
+[format]
+max-line-length=88
+
+[typescheck]
+disable=C0114
+ignored-modules=__init__
