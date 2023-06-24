@@ -95,5 +95,8 @@ repos:
       - id: mypy
         name: mypy
         entry: mypy
+        exclude: tests
         language: system
         types: [python]
+        args:
+          - --config-file=.mypy.ini
