@@ -56,4 +56,4 @@ jobs:
           pylint src
           mypy .
       - name: Test
-        run: pytest
+        run: python -m pytest
