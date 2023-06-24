@@ -14,3 +14,9 @@ updates:
     directory: /
     schedule:
       interval: weekly
+  - package-ecosystem: pip
+    commit-message:
+      prefix: "[python] "
+    directory: /
+    schedule:
+      interval: daily
