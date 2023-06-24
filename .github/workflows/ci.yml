@@ -20,18 +20,38 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
     runs-on: ${{ matrix.os }}
     if: ${{ !github.event.pull_request.draft }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          cache: pip
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/cache@v3
+        with:
+          path: ${{ env.pythonLocation }}
+          key: >
+            ${{ runner.os }}
+            -${{ matrix.python-version }}
+            -${{ hashFiles('pyproject.toml') }}
       - name: Installing dependencies
-        run: echo "Not implemented."
+        run: pip install --upgrade-strategy eager ".[dev,test]"
       - name: Format
-        run: echo "Not implemented."
+        run: |
+          black --check .
+          isort --check-only .
+          docformatter -r .
       - name: Lint
-        run: echo "Not implemented."
-      - name: Build
-        run: echo "Not implemented."
+        run: |
+          yamllint .
+          pydocstyle .
+          flake8 .
+          bandit -c=.bandit.yml -r src
+          pylint src
+          mypy .
       - name: Test
-        run: echo "Not implemented."
+        run: pytest
